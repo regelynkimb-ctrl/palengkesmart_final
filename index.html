@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalengkeSmart — Smart Shopping, Fair Prices</title>
+    <style>
+        :root{--green:#13804d;--lime:#9be51d;--dark:#14211b;--soft:#f3f8f3;--border:#dfe7e1}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#fff}
+button,input,select{font:inherit}.nav{height:76px;display:flex;align-items:center;gap:28px;padding:0 5%;border-bottom:1px solid #ddd;position:sticky;top:0;background:#fff;z-index:10}
+.logo{font-weight:800;font-size:24px;color:var(--green);white-space:nowrap}.logo small{display:block;font-size:12px;color:#555;font-weight:400}
+.nav a{color:#222;text-decoration:none;cursor:pointer}.nav a:hover,.nav a.active{color:var(--green);font-weight:700}.spacer{flex:1}
+.btn{border:0;border-radius:12px;padding:13px 22px;background:var(--green);color:white;font-weight:700;cursor:pointer}.btn.light{background:white;color:var(--green);border:1px solid var(--green)}
+.hero{min-height:390px;background:linear-gradient(#0008,#0008),url("https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1800&q=80") center/cover;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:50px 20px}
+.hero h1{font-size:48px;margin:0 0 12px}.hero h1 span{color:var(--lime)}.hero p{font-size:20px;max-width:700px;margin:0 auto 25px}.search{background:#fff;border-radius:14px;padding:6px;display:flex;max-width:720px;margin:auto}.search input{flex:1;border:0;outline:0;padding:15px;font-size:16px;border-radius:10px}
+.chips{display:flex;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap}.chip{background:white;color:#333;border:0;border-radius:30px;padding:10px 18px;cursor:pointer}
+.container{max-width:1250px;margin:auto;padding:42px 5%}.section-head{display:flex;justify-content:space-between;align-items:center}.section-head h2{margin:0}.muted{color:#66736b}.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:22px}.card{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:white;box-shadow:0 3px 12px #0000000b}.card img{width:100%;height:145px;object-fit:cover}.card-body{padding:14px}.price{color:var(--green);font-size:22px;font-weight:800;margin:5px 0}.card h3{margin:0}.card .btn{width:100%;padding:10px;margin-top:10px}
+.steps{background:#fbfdfb;border:1px solid var(--border);border-radius:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:25px}.step{text-align:center}.num{margin:auto;background:var(--green);color:white;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800}.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:20px}.benefit{background:var(--soft);border-radius:14px;padding:22px}.page{display:none}.page.show{display:block}.compare-tools{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}.compare-tools input,.compare-tools select,.form input,.form select{padding:13px;border:1px solid #ccd8cf;border-radius:10px;flex:1;min-width:200px}.table{width:100%;border-collapse:collapse;margin-top:15px}.table th,.table td{padding:15px;border-bottom:1px solid var(--border);text-align:left}.best{color:var(--green);font-weight:800}.vendor-grid,.market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.vendor,.market{border:1px solid var(--border);border-radius:15px;padding:20px}.form{max-width:650px;display:grid;gap:14px}.form label{font-weight:700}.form input,.form select{width:100%}.notice{padding:15px;border-radius:10px;background:#eff8f1;margin:15px 0}.footer{background:#122019;color:white;padding:35px 5%;margin-top:30px}.modal{display:none;position:fixed;inset:0;background:#0008;z-index:30;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-box{background:white;border-radius:18px;padding:28px;max-width:520px;width:100%;position:relative}.close{position:absolute;right:15px;top:12px;border:0;background:none;font-size:25px;cursor:pointer}
+@media(max-width:900px){.nav{gap:12px;padding:0 3%;overflow:auto}.nav a{display:none}.cards{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}.benefits,.vendor-grid,.market-grid{grid-template-columns:1fr}.hero h1{font-size:34px}.logo{font-size:20px}}
+@media(max-width:520px){.cards{grid-template-columns:1fr}.search{display:block;background:transparent}.search input{width:100%;margin-bottom:8px}.search .btn{width:100%}}
+    </style>
+    
+</head>
+<body>
+    <nav class="nav">
+<div class="logo"> 🛒 PalengkeSmart<small>Fresh picks, Smart clicks</small></div>
+<a class="active" data-page="home">Home</a><a data-page="compare">Compare Prices</a><a data-page="vendors">Vendors</a><a data-page="markets">Markets</a><a data-page="how">How It Works</a><a data-page="about">About Us</a>
+<div class="spacer"></div><button class="btn" onclick="showPage('vendorJoin')">For Vendors</button>
+</nav>
+
+
+<main>
+<section id="home" class="page show">
+<div class="hero">
+<div>
+<h1>SMART SHOPPING <span>STARTS HERE.</span></h1>
+<p>Compare palengke prices before you shop. Find fresh goods. Support local vendors.</p>
+<div class="search"><input id="heroSearch" placeholder="What are you looking for?"><button class="btn" onclick="searchFromHero()">Search</button></div>
+<div class="chips"><button class="chip" onclick="filterCategory('Vegetables')">🥬 Vegetables</button><button class="chip" onclick="filterCategory('Meat')">🥩 Meat</button><button class="chip" onclick="filterCategory('Fish')">🐟 Fish</button><button class="chip" onclick="filterCategory('Staples')">🍚 Staples</button></div>
+</div>
+</div>
+<div class="container">
+<div class="section-head"><div><h2>🏷️ TODAY'S BEST DEALS</h2><div class="muted">Fresh finds at the best market prices in Pampanga</div></div><button class="btn light" onclick="showPage('compare')">View all prices →</button></div>
+<div class="cards" id="dealCards"></div>
+</div>
+<div class="container">
+<h2 style="text-align:center">HOW <span style="color:var(--green)">PALENGKESMART</span> WORKS</h2>
+<div class="steps"><div class="step"><div class="num">1</div><h3>Search</h3><p>Find the products you need.</p></div><div class="step"><div class="num">2</div><h3>Compare</h3><p>Compare prices from vendors.</p></div><div class="step"><div class="num">3</div><h3>Choose</h3><p>Pick the best price and trusted vendor.</p></div><div class="step"><div class="num">4</div><h3>Reserve</h3><p>Reserve your order online.</p></div><div class="step"><div class="num">5</div><h3>Pick Up & Pay</h3><p>Pay the vendor directly at pickup.</p></div></div>
+<div class="benefits"><div class="benefit"><h3>💰 Save Money</h3><p>Compare prices and get better value.</p></div><div class="benefit"><h3>⏱️ Save Time</h3><p>No need to visit multiple stalls just to compare.</p></div><div class="benefit"><h3>🥬 Fresh & Quality</h3><p>Discover goods from trusted local vendors.</p></div><div class="benefit"><h3>🤝 Support Local</h3><p>Help small market businesses reach more buyers.</p></div></div>
+</div>
+</section>
+
+<section id="compare" class="page">
+<div class="container"><h1>🔎 Compare Prices</h1><p class="muted">Live market prices gathered and updated across participating.</p>
+<div class="compare-tools"><input id="compareSearch" placeholder="Search product..." oninput="renderCompare()"><select id="category" onchange="renderCompare()"><option value="">All categories</option><option>Vegetables</option><option>Meat</option><option>Fish</option><option>Staples</option></select></div>
+<table class="table"><thead><tr><th>Product</th><th>Vendor</th><th>Market</th><th>Price</th><th>Rating</th><th></th></tr></thead><tbody id="compareBody"></tbody></table></div>
+</section>
+
+<section id="vendors" class="page"><div class="container"><h1>🏪 Verified Vendors</h1><p class="muted">Discover trusted local market vendors and their latest daily listings.</p><div class="vendor-grid" id="vendorGrid"></div></div></section>
+
+<section id="markets" class="page"><div class="container"><h1>📍 Markets</h1><p class="muted">Explore verified partner markets and local trading locations.</p><div class="market-grid"><div class="market"><h2>Market A</h2><p>📍 Pampanga</p><p>25 vendors · Vegetables · Meat · Fish</p><button class="btn light" onclick="showPage('vendors')">View vendors</button></div><div class="market"><h2>Market B</h2><p>📍 Pampanga</p><p>18 vendors · Fish · Staples · Eggs</p><button class="btn light" onclick="showPage('vendors')">View vendors</button></div><div class="market"><h2>Market C</h2><p>📍 Pampanga</p><p>12 vendors · Vegetables · Staples</p><button class="btn light" onclick="showPage('vendors')">View vendors</button></div></div></div></section>
+
+<section id="how" class="page"><div class="container"><h1>How PalengkeSmart Works</h1><div class="notice"><b>For buyers:</b> Search → Compare → Choose → Reserve → Pick up & pay the vendor directly.</div><div class="notice"><b>For vendors:</b> Register → List products → Update prices → Receive reservations → Sell.</div><h2>How We Keep Prices and Information Trustworthy</h2><p>✅ Verified Vendor Profiles: Every seller undergoes identity and stall verification before listing products.</p><p>🔎 Community Price Audits: On-the-ground spot checks and daily market updates keep prices accurate during pilot testing.</p><p>🚨 Crowdsourced Accuracy: Shoppers and vendors can instantly report outdated prices or out-of-stock items.</p></div></section>
+
+<section id="about" class="page"><div class="container"><h1>About PalengkeSmart</h1><p>PalengkeSmart is a community-centric digital platform designed to connect local shoppers directly with public market vendors through transparent price tracking, stall discovery, and pre-orders.</p><h2>Our Goal/ Mission</h2><p>Empowering local market shoppers with daily verified prices while helping small vendors grow their customer reach and minimize unsold inventory.</p><div class="notice"><b>Community Note:</b> Daily price monitoring is maintained in partnership with local vendors to assist buyers in planning efficient market visits.</div></div></section>
+
+<section id="vendorJoin" class="page"><div class="container"><h1>👨‍🌾 Grow With PalengkeSmart</h1><p>Reach more local customers through a simple digital storefront.</p><div class="benefits"><div class="benefit"><h3>📱 Digital Storefront</h3><p>Show your products and prices online.</p></div><div class="benefit"><h3>👥 More Reach</h3><p>Be discovered by buyers searching for your products.</p></div><div class="benefit"><h3>📦 Reservations</h3><p>Prepare orders before customers arrive.</p></div><div class="benefit"><h3>📊 Insights</h3><p>Understand demand and popular products.</p></div></div><h2 style="margin-top:35px">Vendor Plans</h2><div class="vendor-grid"><div class="vendor"><h2>Basic</h2><h1>₱100<span style="font-size:15px">/month</span></h1><p>✓ Vendor listing<br>✓ Product listing<br>✓ Price updates<br>✓ Reservations</p><button class="btn" onclick="showJoinForm()">Become a Vendor</button></div>
+</main>
+
+<div class="modal" id="modal"><div class="modal-box"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<footer class="footer"><b>🛒 PalengkeSmart</b><p>Smart Shopping, Fair Prices, Fresher Goods — For Every Family and Vendor.</p><small>Connecting you to fresh goods and trusted local vendors.</small></footer>
+
+
+    <script>
+        const products=[
+{name:"Tomato",cat:"Vegetables",vendor:"Mang Pedro's Stall",market:"Market A",price:70,rating:4.8,img:"https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=600&q=80"},
+{name:"Onion",cat:"Vegetables",vendor:"Aling Maria's Store",market:"Market B",price:120,rating:4.6,img:"https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80"},
+{name:"Chicken",cat:"Meat",vendor:"Ana's Meat Stall",market:"Market A",price:180,rating:4.7,img:"https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=600&q=80"},
+{name:"Bangus",cat:"Fish",vendor:"Liza's Fish Stall",market:"Market B",price:200,rating:4.7,img:"https://punto.com.ph/wp-content/uploads/2024/04/02-COVER-1.jpg"},
+{name:"Regular Rice",cat:"Staples",vendor:"Juana's Rice Store",market:"Market C",price:55,rating:4.5,img:"https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=600&q=80"},
+{name:"Pork Belly",cat:"Meat",vendor:"Kuya Ben's Meat Stall",market:"Market C",price:320,rating:4.8,img:"https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=600&q=80"}
+];
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('show'));document.getElementById(id).classList.add('show');document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('active',a.dataset.page===id));window.scrollTo(0,0);if(id==='compare')renderCompare();}
+function renderDeals(){document.getElementById('dealCards').innerHTML=products.slice(0,5).map(p=>`<div class="card"><img src="${p.img}"><div class="card-body"><h3>${p.name}</h3><div class="price">₱${p.price} <span style="font-size:13px">/ kg</span></div><div>${p.vendor}</div><div>${p.market}</div><div>⭐ ${p.rating}</div><button class="btn light" onclick='openReserve(${JSON.stringify(p)})'>View Deal</button></div></div>`).join('');}
+function renderCompare(){let q=(document.getElementById('compareSearch')?.value||'').toLowerCase(),c=document.getElementById('category')?.value||'';let rows=products.filter(p=>(!q||p.name.toLowerCase().includes(q))&&(!c||p.cat===c));document.getElementById('compareBody').innerHTML=rows.map(p=>`<tr><td><b>${p.name}</b></td><td>${p.vendor}</td><td>${p.market}</td><td class="best">₱${p.price}/kg</td><td>⭐ ${p.rating}</td><td><button class="btn" onclick='openReserve(${JSON.stringify(p)})'>Reserve</button></td></tr>`).join('')||'<tr><td colspan="6">No demo products found.</td></tr>';}
+function filterCategory(cat){showPage('compare');document.getElementById('category').value=cat;renderCompare();}
+function searchFromHero(){let q=document.getElementById('heroSearch').value;showPage('compare');document.getElementById('compareSearch').value=q;renderCompare();}
+function openReserve(p){document.getElementById('modalContent').innerHTML=`<h2>🛒 Reserve ${p.name}</h2><p><b>${p.vendor}</b> · ${p.market}<br><span class="price">₱${p.price}/kg</span></p><div class="form"><label>Your name<input id="buyer" required></label><label>Contact number<input id="phone" required></label><label>Quantity (kg)<input id="qty" type="number" min="1" value="1"></label><label>Pickup date<input id="date" type="date"></label><button class="btn" onclick="confirmReservation('${p.name}','${p.vendor}')">Confirm Reservation</button></div><p class="muted">Payment for the actual goods is made directly to the vendor upon pickup.</p>`;document.getElementById('modal').classList.add('show');}
+function confirmReservation(prod,vendor){let name=document.getElementById('buyer').value||'Buyer';let id='PS-'+Math.floor(10000+Math.random()*89999);document.getElementById('modalContent').innerHTML=`<h2>✅ Reservation Confirmed!</h2><p>Hi <b>${name}</b>! Your request for <b>${prod}</b> from <b>${vendor}</b> has been recorded in this prototype.</p><div class="notice"><b>Reservation ID:</b> ${id}<br><br>Please contact the vendor and pay directly upon pickup.</div><button class="btn" onclick="closeModal()">Done</button>`;}
+function showJoinForm(){document.getElementById('modalContent').innerHTML=`<h2>👨‍🌾 Vendor Registration</h2><div class="form"><label>Vendor / Stall name<input id="vname"></label><label>Owner name<input id="owner"></label><label>Market<select><option>Market A</option><option>Market B</option><option>Market C</option></select></label><label>Contact number<input id="vphone"></label><label>Products sold<input id="vproducts" placeholder="e.g. vegetables, fish"></label><button class="btn" onclick="vendorSubmitted()">Submit Registration</button></div>`;document.getElementById('modal').classList.add('show');}
+function vendorSubmitted(){document.getElementById('modalContent').innerHTML='<h2>✅ Registration Submitted</h2><p>Thank you! Your registration has been received. Our team is now verifying your vendor and market details. You will receive an email confirmation once your listing is activated (typically within 1-2 business days). Please check your inbox and spam folder.</p><button class="btn" onclick="closeModal()">Done</button>';}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function renderVendors(){let names=[["Mang Pedro's Stall","Market A",4.8],["Aling Maria's Store","Market B",4.6],["Ana's Meat Stall","Market A",4.7],["Liza's Fish Stall","Market B",4.7],["Juana's Rice Store","Market C",4.5],["Kuya Ben's Egg Stall","Market C",4.8]];document.getElementById('vendorGrid').innerHTML=names.map(v=>`<div class="vendor"><h2>🏪 ${v[0]}</h2><p>📍 ${v[1]}</p><p>⭐ ${v[2]} · Verified vendor (demo)</p><button class="btn light" onclick="filterVendor('${v[0]}')">View Products</button></div>`).join('')}
+function filterVendor(v){showPage('compare');document.getElementById('compareSearch').value='';document.getElementById('category').value='';let rows=products.filter(p=>p.vendor===v);document.getElementById('compareBody').innerHTML=rows.map(p=>`<tr><td><b>${p.name}</b></td><td>${p.vendor}</td><td>${p.market}</td><td class="best">₱${p.price}/kg</td><td>⭐ ${p.rating}</td><td><button class="btn" onclick='openReserve(${JSON.stringify(p)})'>Reserve</button></td></tr>`).join('')}
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>showPage(a.dataset.page)));renderDeals();renderCompare();renderVendors();
+    </script>
+
+</body>
+</html>
